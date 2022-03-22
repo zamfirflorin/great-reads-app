@@ -1,7 +1,11 @@
 package devmind.greatreadsapp.reader;
 
 import devmind.greatreadsapp.book.Book;
+import devmind.greatreadsapp.book.BookDto;
 import devmind.greatreadsapp.book.BookService;
+import devmind.greatreadsapp.review.Review;
+import devmind.greatreadsapp.review.ReviewDto;
+import devmind.greatreadsapp.review.ReviewService;
 import devmind.greatreadsapp.user.User;
 import devmind.greatreadsapp.user.UserService;
 import org.modelmapper.ModelMapper;
@@ -23,6 +27,9 @@ public class ReaderService {
     @Autowired
     private BookService bookService;
 
+    @Autowired
+    private ReviewService reviewService;
+
     public List<ReaderDto> getAllReaders() {
        return userService.getAllUsers().stream()
                 .map(userDto -> modelMapper.map(userDto, User.class))
@@ -32,8 +39,25 @@ public class ReaderService {
                 .toList();
     }
 
-    public List<Book> addToWishList() {
+    public List<Book> addToWishList(ReaderDto readerDto, Long bookId) {
+        List<Book> wishList = readerDto.getWishList();
+        BookDto bookDto = bookService.getBookById(bookId);
+        wishList.add(modelMapper.map(bookDto, Book.class));
+        return wishList;
+    }
 
+    public List<Book> addToReadList(ReaderDto readerDto, Long bookId) {
+        List<Book> readList = readerDto.getReadBooks();
+        BookDto bookDto = bookService.getBookById(bookId);
+        readList.add(modelMapper.map(bookDto, Book.class));
+        return readList;
+    }
+
+    public List<Review> addToReviewList(ReaderDto readerDto, Long reviewId) {
+        List<Review> reviewList = readerDto.getReviewList();
+        ReviewDto reviewDto = reviewService.getReview(reviewId);
+        reviewList.add(modelMapper.map(reviewDto, Review.class));
+        return reviewList;
     }
 
     private Reader convertToReader(User user) {

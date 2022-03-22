@@ -1,6 +1,7 @@
 package devmind.greatreadsapp.book;
 
 
+import devmind.greatreadsapp.review.Review;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,16 +29,16 @@ public class Book {
 
     private LocalDateTime publishedDate;
 
-    private List<Long> reviewsIdList;
+    private List<Review> reviewsList;
 
 
-    public Book(String title, String author, String description, LocalDateTime publishedDate, List<Long> reviewsIdList) {
+    public Book(String title, String author, String description, LocalDateTime publishedDate, List<Review> reviewList) {
         this.id = getNumberOfInstance();
         this.title = title;
         this.author = author;
         this.description = description;
         this.publishedDate = publishedDate;
-        this.reviewsIdList = reviewsIdList;
+        this.reviewsList = reviewList;
     }
 
     private Long getNumberOfInstance() {

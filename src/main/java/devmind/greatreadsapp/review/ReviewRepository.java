@@ -33,13 +33,19 @@ public class ReviewRepository {
     public void updateReview(Review review) {
         inMemoryRepository.getReviewMap().put(review.getId(), review);
     }
-
     public void delete(Long id) {
         inMemoryRepository.getReviewMap().remove(id);
     }
 
+    public List<Review> getAllReviewsByBookId(Long bookId) {
+        List<Review> reviewList = new ArrayList<>();
+        Map<Long, Review> reviewMap = inMemoryRepository.getReviewMap();
 
-
-
-
+        for (Long key : reviewMap.keySet()) {
+            if (reviewMap.get(key).getBook().getId().equals(bookId)) {
+                reviewList.add(reviewMap.get(key));
+            }
+        }
+        return reviewList;
+    }
 }

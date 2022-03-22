@@ -1,8 +1,10 @@
 package devmind.greatreadsapp.book;
 
+import devmind.greatreadsapp.review.Review;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @Getter
@@ -12,10 +14,15 @@ import java.time.LocalDateTime;
 public class BookDto {
 
     private Long id;
+
     private String title;
+
     private String author;
 
     private String description;
 
     private LocalDateTime publishedDate;
+
+    private List<Review> reviewsList;
+
 }
