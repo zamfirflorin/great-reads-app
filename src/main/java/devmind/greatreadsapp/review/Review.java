@@ -6,11 +6,13 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+
 @Getter
 @Setter
 public class Review {
 
-    private Long id = 1L;
+    static Long nbInstances = 1L;
+    private Long id;
     private String comment;
     private Long rating;
     private String author;
@@ -22,5 +24,9 @@ public class Review {
         this.rating = rating;
         this.author = author;
         this.publishedTimestamp = publishedTimestamp;
+    }
+
+    private Long getNumberOfInstance() {
+        return nbInstances++;
     }
 }

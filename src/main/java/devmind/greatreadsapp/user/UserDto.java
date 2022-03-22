@@ -1,15 +1,18 @@
 package devmind.greatreadsapp.user;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDto {
 
-    String email;
-    String password;
-    String firstName;
-    String lastName;
+    private Long id;
+    private String email;
+    private String password;
+    private String firstName;
+    private String lastName;
 }
