@@ -21,8 +21,8 @@ public class Reader extends User {
 
     private List<Book> wishList;
 
-    public Reader(Long id, String email, String password, String firstName, String lastName, List<Book> readBooks, List<Review> reviewList, List<Book> wishList) {
-        super(id, email, password, firstName, lastName);
+    public Reader(String email, String password, String firstName, String lastName, List<Book> readBooks, List<Review> reviewList, List<Book> wishList) {
+        super(email, password, firstName, lastName);
         this.readBooks = readBooks;
         this.reviewList = reviewList;
         this.wishList = wishList;

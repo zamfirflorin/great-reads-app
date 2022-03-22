@@ -8,14 +8,14 @@ import lombok.Setter;
 @Setter
 public abstract class User {
 
-    Long id;
+    Long id = 1L;
     String email;
     String password;
     String firstName;
     String lastName;
 
-    public User(Long id, String email, String password, String firstName, String lastName) {
-        this.id = id;
+    public User(String email, String password, String firstName, String lastName) {
+        this.id = id++;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
