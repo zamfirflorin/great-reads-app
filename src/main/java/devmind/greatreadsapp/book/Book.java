@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Book {
 
-    private Long id;
+    private Long id = 1L;
 
     private String title;
 
@@ -28,4 +28,12 @@ public class Book {
     private List<Long> reviewsIdList;
 
 
+    public Book(String title, String author, String description, LocalDateTime publishedDate, List<Long> reviewsIdList) {
+        this.id = id++;
+        this.title = title;
+        this.author = author;
+        this.description = description;
+        this.publishedDate = publishedDate;
+        this.reviewsIdList = reviewsIdList;
+    }
 }

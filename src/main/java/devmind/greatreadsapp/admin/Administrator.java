@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Administrator extends User {
 
-    public Administrator(Long id, String email, String password, String firstName, String lastName) {
-        super(id, email, password, firstName, lastName);
+    public Administrator(String email, String password, String firstName, String lastName) {
+        super(email, password, firstName, lastName);
     }
 
 
