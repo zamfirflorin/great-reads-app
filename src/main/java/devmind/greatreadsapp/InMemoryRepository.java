@@ -3,16 +3,15 @@ package devmind.greatreadsapp;
 import devmind.greatreadsapp.book.Book;
 import devmind.greatreadsapp.review.Review;
 import devmind.greatreadsapp.user.User;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @Component
 public class InMemoryRepository {
 
@@ -20,4 +19,9 @@ public class InMemoryRepository {
     Map<Long, Book> bookMap;
     Map<Long, Review> reviewMap;
 
+    public InMemoryRepository() {
+        this.userMap = new HashMap<>();
+        this.bookMap = new HashMap<>();
+        this.reviewMap = new HashMap<>();
+    }
 }
