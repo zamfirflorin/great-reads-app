@@ -60,9 +60,15 @@ public class ReaderService {
         return reviewList;
     }
 
+    public void downlodEbook(BookDto bookDto) {
+
+    }
+
     private Reader convertToReader(User user) {
         return new Reader(user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     }
+
+
 
 
 }
