@@ -13,13 +13,13 @@ import java.util.Map;
 @Getter
 @Setter
 @Component
-public class InMemoryRepository {
+public class InMemoryDataStore {
 
     Map<Long, User>  userMap;
     Map<Long, Book> bookMap;
     Map<Long, Review> reviewMap;
 
-    public InMemoryRepository() {
+    public InMemoryDataStore() {
         this.userMap = new HashMap<>();
         this.bookMap = new HashMap<>();
         this.reviewMap = new HashMap<>();

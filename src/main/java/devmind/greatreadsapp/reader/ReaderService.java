@@ -60,6 +60,11 @@ public class ReaderService {
         return reviewList;
     }
 
+    public void addReviewToBook(ReaderDto readerDto, BookDto bookDto, ReviewDto reviewDto) {
+        List<Review> reviewList = readerDto.getReviewList();
+        reviewList.add(modelMapper.map(reviewDto, Review.class));
+    }
+
     public void downlodEbook(BookDto bookDto) {
 
     }
@@ -67,8 +72,5 @@ public class ReaderService {
     private Reader convertToReader(User user) {
         return new Reader(user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     }
-
-
-
 
 }
