@@ -1,7 +1,7 @@
 package devmind.greatreadsapp.user;
 
 
-import devmind.greatreadsapp.InMemoryRepository;
+import devmind.greatreadsapp.InMemoryDataStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,23 +13,23 @@ import java.util.Map;
 public class UserRepository {
 
     @Autowired
-    private InMemoryRepository inMemoryRepository;
+    private InMemoryDataStore inMemoryDataStore;
 
     public void create(User user) {
-        inMemoryRepository.getUserMap().put(user.getId(), user);
+        inMemoryDataStore.getUserMap().put(user.getId(), user);
     }
 
     public void update(User user) {
-        inMemoryRepository.getUserMap().put(user.getId(), user);
+        inMemoryDataStore.getUserMap().put(user.getId(), user);
     }
 
     public User getUser(Long id) {
-        return inMemoryRepository.getUserMap().get(id);
+        return inMemoryDataStore.getUserMap().get(id);
     }
 
     public List<User> getAllUsers() {
         List<User> userList = new ArrayList<>();
-        Map<Long, User> userMap = inMemoryRepository.getUserMap();
+        Map<Long, User> userMap = inMemoryDataStore.getUserMap();
         for (Long key : userMap.keySet()) {
             userList.add(userMap.get(key));
         }
@@ -37,6 +37,6 @@ public class UserRepository {
     }
 
     public void delete(User user) {
-        inMemoryRepository.getUserMap().remove(user.getId());
+        inMemoryDataStore.getUserMap().remove(user.getId());
     }
 }
