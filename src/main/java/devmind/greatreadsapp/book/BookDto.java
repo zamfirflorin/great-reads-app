@@ -25,4 +25,7 @@ public class BookDto {
 
     private List<Review> reviewsList;
 
+    private String category;
+
+    private boolean isPublished;
 }
