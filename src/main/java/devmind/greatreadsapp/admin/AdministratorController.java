@@ -12,7 +12,6 @@ public class AdministratorController {
     @Autowired
     private AdministratorService administratorService;
 
-
     public void approveAuthorBook(Author author, Book book) {
 
     }
@@ -24,8 +23,6 @@ public class AdministratorController {
     public void deleteUserReview(UserDto userDto, ReviewDto reviewDto) {
 
     }
-
-
 
 
 }

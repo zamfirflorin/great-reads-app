@@ -1,0 +1,1 @@
+docker run --name some-postgres -it -v /postgres-data:/var/lib/postgresql/data -e POSTGRES_PASSWORD=mysecretpassword -d -p 5433:5432 postgres
