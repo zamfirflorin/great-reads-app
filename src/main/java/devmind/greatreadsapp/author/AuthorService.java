@@ -15,7 +15,7 @@ public class AuthorService {
     @Autowired
     private BookService bookService;
 
-    public List<Book> getAllBooksByCategory(String category) {
+    public List<BookDto> getAllBooksByCategory(String category) {
         return bookService.getAllBooksByCategory(category);
     }
 

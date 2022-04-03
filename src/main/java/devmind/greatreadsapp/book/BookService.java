@@ -29,9 +29,10 @@ public class BookService {
        return reviewService.getAllReviewsByBookId(bookId);
     }
 
-    public List<Book> getAllBooksByCategory(String category) {
+    public List<BookDto> getAllBooksByCategory(String category) {
         return bookRepository.getAllBooks().stream()
-                .filter(book -> book.getCategory().equals(category))
+                .filter(book -> book.getCategory().equals(category)) //Book
+                .map(book -> modelMapper.map(book, BookDto.class)) //BookDto
                 .collect(Collectors.toList());
     }
 
@@ -44,5 +45,6 @@ public class BookService {
     public void addBook(BookDto bookDto) {
         bookRepository.create(new ModelMapper().map(bookDto, Book.class));
     }
+
 
 }
