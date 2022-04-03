@@ -5,6 +5,7 @@ import devmind.greatreadsapp.review.ReviewService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,6 +36,17 @@ public class BookService {
                 .map(book -> modelMapper.map(book, BookDto.class)) //BookDto
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public BookDto updateBook(BookDto bookDto) {
+        Book book = bookRepository.getBookById(bookDto.getId());
+        book.setCategory(bookDto.getCategory());
+        book.setAuthor(book.getAuthor());
+        book.setTitle(book.getTitle());
+        bookRepository.update(book);
+        return modelMapper.map(book, BookDto.class);
+    }
+
 
     public List<Book> getAllPublishedBooks() {
         return bookRepository.getAllBooks().stream()
