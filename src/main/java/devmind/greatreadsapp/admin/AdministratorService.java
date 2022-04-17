@@ -1,9 +1,5 @@
 package devmind.greatreadsapp.admin;
 
-import devmind.greatreadsapp.author.Author;
-import devmind.greatreadsapp.book.Book;
-import devmind.greatreadsapp.review.ReviewDto;
-import devmind.greatreadsapp.user.UserDto;
 import devmind.greatreadsapp.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,16 +10,15 @@ public class AdministratorService {
     @Autowired
     private UserRepository administratorRepository;
 
-
-    public void approveAuthorBook(Author author, Book book) {
-
-    }
-
-    public void rejectAuthorBook(Author author, Book book) {
+    public void approveAuthorBook(final Long authorId, final Long bookId) {
 
     }
 
-    public void deleteUserReview(UserDto userDto, ReviewDto reviewDto) {
+    public void rejectAuthorBook(final Long authorId, final Long bookId) {
+
+    }
+
+    public void deleteUserReview(final Long userId, final Long reviewId) {
 
     }
 

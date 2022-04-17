@@ -1,18 +1,15 @@
 package devmind.greatreadsapp.admin;
 
-import devmind.greatreadsapp.author.Author;
-import devmind.greatreadsapp.book.Book;
 import devmind.greatreadsapp.book.BookDto;
 import devmind.greatreadsapp.book.BookService;
-import devmind.greatreadsapp.review.ReviewDto;
-import devmind.greatreadsapp.user.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+
+@RestController
+@RequestMapping("/api/v1/administrator")
 public class AdministratorController {
 
     @Autowired
@@ -21,21 +18,24 @@ public class AdministratorController {
     @Autowired
     private BookService bookService;
 
-    public void approveAuthorBook(Author author, Book book) {
-
+    @GetMapping(value ="/approveAuthorBook")
+    public void approveAuthorBook(@RequestParam Long authorId, @RequestParam Long bookId) {
+        administratorService.approveAuthorBook(authorId, bookId);
     }
 
-    public void rejectAuthorBook(Author author, Book book) {
-
+    @GetMapping(value ="/rejectAuthorBook")
+    public void rejectAuthorBook(@RequestParam Long authorId, @RequestParam Long bookId)  {
+        administratorService.rejectAuthorBook(authorId, bookId);
     }
 
-    public void deleteUserReview(UserDto userDto, ReviewDto reviewDto) {
-
+    @DeleteMapping(value ="/deleteUserReview")
+    public void deleteUserReview(@RequestParam Long userId, @RequestParam Long reviewId) {
+        administratorService.deleteUserReview(userId, reviewId);
     }
 
-    @PostMapping(value = "/updateBook", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public BookDto updateBook(RequestBody BookDto dto) {
-        return bookService.updateBook(dto);
+    @PutMapping(value = "/updateBook", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BookDto> updateBook(@RequestBody BookDto bookDto) {
+        return ResponseEntity.ok(bookService.updateBook(bookDto));
     }
 
 
