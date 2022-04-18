@@ -16,6 +16,7 @@ public  class User {
      String password;
      String firstName;
      String lastName;
+     UserType type;
 
     public User(String email, String password, String firstName, String lastName) {
         this.id = getNumberOfInstance();

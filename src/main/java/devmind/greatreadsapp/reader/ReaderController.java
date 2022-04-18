@@ -1,6 +1,5 @@
 package devmind.greatreadsapp.reader;
 
-import devmind.greatreadsapp.book.Book;
 import devmind.greatreadsapp.book.BookDto;
 import devmind.greatreadsapp.book.BookService;
 import org.modelmapper.ModelMapper;
@@ -21,7 +20,7 @@ public class ReaderController {
 
     private ModelMapper mapper = new ModelMapper();
 
-    public List<Book> getAllBooksByCategory(String category) {
+    public List<BookDto> getAllBooksByCategory(String category) {
         return bookService.getAllBooksByCategory(category);
     }
 
