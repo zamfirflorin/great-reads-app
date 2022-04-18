@@ -1,33 +1,42 @@
 package devmind.greatreadsapp.user;
 
 
-import devmind.greatreadsapp.InMemoryRepository;
-import org.modelmapper.ModelMapper;
+import devmind.greatreadsapp.InMemoryDataStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Component
 public class UserRepository {
 
     @Autowired
-    InMemoryRepository inMemoryRepository;
+    private InMemoryDataStore inMemoryDataStore;
 
-    ModelMapper modelMapper;
-
-    void create(User user) {
-        inMemoryRepository.getUserMap().get(user.getId());
+    public void create(User user) {
+        inMemoryDataStore.getUserMap().put(user.getId(), user);
     }
 
-    void update(User user) {
-        User us = getUser(user.getId());
-
+    public void update(User user) {
+        inMemoryDataStore.getUserMap().put(user.getId(), user);
     }
 
-    User getUser(Long id) {
-        return inMemoryRepository.getUserMap().get(id);
+    public User getUser(Long id) {
+        return inMemoryDataStore.getUserMap().get(id);
     }
 
-    void delete(User user) {
-        inMemoryRepository.getUserMap().remove(user.getId());
+    public List<User> getAllUsers() {
+        List<User> userList = new ArrayList<>();
+        Map<Long, User> userMap = inMemoryDataStore.getUserMap();
+        for (Long key : userMap.keySet()) {
+            userList.add(userMap.get(key));
+        }
+        return userList;
+    }
+
+    public void delete(User user) {
+        inMemoryDataStore.getUserMap().remove(user.getId());
     }
 }

@@ -7,14 +7,16 @@ import lombok.Setter;
 
 import java.util.List;
 
-
 @Getter
 @Setter
 public class Author extends User {
 
     private List<Book> publishedBooks;
 
-    public Author(Long id, String email, String password, String firstName, String lastName) {
-        super(id, email, password, firstName, lastName);
+    public Author(String email, String password, String firstName, String lastName, List<Book> publishedBooks) {
+        super(email, password, firstName, lastName);
+        this.publishedBooks = publishedBooks;
     }
+
+
 }
