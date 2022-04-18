@@ -37,7 +37,8 @@ public class AuthorController {
        bookService.addProfilePicture(file, userId);
     }
 
-    public void addPdfFile() {
-        //to implement
+    @PostMapping(value ="/uploadBook", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void uploadBookPDF(@RequestBody File file) {
+        bookService.uploadBook(file);
     }
 }

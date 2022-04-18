@@ -62,4 +62,7 @@ public class BookService {
 
     public void addProfilePicture(File file, Long userId) {
     }
+
+    public void uploadBook(File file) {
+    }
 }
