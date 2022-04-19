@@ -4,6 +4,7 @@ package devmind.greatreadsapp.book;
 import devmind.greatreadsapp.review.Review;
 import lombok.*;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,39 +14,34 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "book")
 public class Book {
 
-    static Long nbInstances = 1L;
-
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "title")
     private String title;
 
+    @Column(name = "author")
     private String author;
 
+    @Column(name = "desription")
     private String description;
 
+    @Column(name = "published_date")
     private LocalDateTime publishedDate;
 
+    @OneToMany
     private List<Review> reviewsList;
 
+    @Column(name = "category")
     private String category;
 
+    @Column(name = "is_published")
     private boolean isPublished;
 
-
-    public Book(String title, String author, String description, LocalDateTime publishedDate, List<Review> reviewList, String category, boolean isPublished) {
-        this.id = getNumberOfInstance();
-        this.title = title;
-        this.author = author;
-        this.description = description;
-        this.publishedDate = publishedDate;
-        this.reviewsList = reviewList;
-        this.category = category;
-        this.isPublished = isPublished;
-    }
-
-    private Long getNumberOfInstance() {
-        return nbInstances++;
-    }
 }

@@ -1,42 +1,22 @@
 package devmind.greatreadsapp.user;
 
 
-import devmind.greatreadsapp.InMemoryDataStore;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
-@Component
-public class UserRepository {
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Autowired
-    private InMemoryDataStore inMemoryDataStore;
+    User save(User user);
 
-    public void create(User user) {
-        inMemoryDataStore.getUserMap().put(user.getId(), user);
-    }
+    void update(User user);
 
-    public void update(User user) {
-        inMemoryDataStore.getUserMap().put(user.getId(), user);
-    }
+    Optional<User> findById(Long id);
 
-    public User getUser(Long id) {
-        return inMemoryDataStore.getUserMap().get(id);
-    }
+    List<User> findAll();
 
-    public List<User> getAllUsers() {
-        List<User> userList = new ArrayList<>();
-        Map<Long, User> userMap = inMemoryDataStore.getUserMap();
-        for (Long key : userMap.keySet()) {
-            userList.add(userMap.get(key));
-        }
-        return userList;
-    }
-
-    public void delete(User user) {
-        inMemoryDataStore.getUserMap().remove(user.getId());
-    }
+    void delete(User user);
 }

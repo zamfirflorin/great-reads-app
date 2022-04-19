@@ -10,12 +10,11 @@ import devmind.greatreadsapp.user.User;
 import devmind.greatreadsapp.user.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
 public class ReaderService {
 
     @Autowired
@@ -34,7 +33,6 @@ public class ReaderService {
        return userService.getAllUsers().stream()
                 .map(userDto -> modelMapper.map(userDto, User.class))
                 .filter(user -> user instanceof Reader)
-                .map(this::convertToReader)
                 .map(reader -> modelMapper.map(reader, ReaderDto.class))
                 .toList();
     }
@@ -67,10 +65,6 @@ public class ReaderService {
 
     public void downlodEbook(BookDto bookDto) {
 
-    }
-
-    private Reader convertToReader(User user) {
-        return new Reader(user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     }
 
 }

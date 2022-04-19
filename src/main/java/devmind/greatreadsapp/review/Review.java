@@ -4,33 +4,34 @@ package devmind.greatreadsapp.review;
 import devmind.greatreadsapp.book.Book;
 import devmind.greatreadsapp.user.User;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 
+@NoArgsConstructor
 @Getter
 @Setter
+@Entity
+@Table(name = "review")
 public class Review {
 
-    static Long nbInstances = 1L;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "comment")
     private String comment;
+
+    @Column(name = "rating")
     private Long rating;
+
     private User author;
     private Book book;
     private LocalDateTime publishedTimestamp;
 
-    public Review(String comment, Long rating, User author, LocalDateTime publishedTimestamp, Book book) {
-        this.id = id++;
-        this.comment = comment;
-        this.rating = rating;
-        this.author = author;
-        this.publishedTimestamp = publishedTimestamp;
-        this.book = book;
-    }
 
-    private Long getNumberOfInstance() {
-        return nbInstances++;
-    }
 }
