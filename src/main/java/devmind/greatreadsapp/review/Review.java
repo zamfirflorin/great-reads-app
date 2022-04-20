@@ -29,9 +29,15 @@ public class Review {
     @Column(name = "rating")
     private Long rating;
 
-    private User author;
-    private Book book;
-    private LocalDateTime publishedTimestamp;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
+
+    @Column(name = "published_date")
+    private LocalDateTime publishedTimestamp;
 
 }

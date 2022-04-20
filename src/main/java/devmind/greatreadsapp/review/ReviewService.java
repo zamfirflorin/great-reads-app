@@ -25,7 +25,7 @@ public class ReviewService {
     public void createReview(ReviewDto reviewDto, BookDto bookDto, UserDto userDto) {
         Review review = modelMapper.map(reviewDto, Review.class);
         review.setBook(modelMapper.map(bookDto, Book.class));
-        review.setAuthor(modelMapper.map(userDto, User.class));
+        review.setUser(modelMapper.map(userDto, User.class));
         reviewRepository.save(review);
     }
     public ReviewDto getReview(Long id) {

@@ -18,16 +18,17 @@ public class UserService implements IUserService {
 
     @Override
     @Transactional
-    public void create(UserDto userDto) {
+    public UserDto create(UserDto userDto) {
         User user = modelMapper.map(userDto, User.class);
         userRepository.save(user);
+        return userDto;
     }
 
     @Override
     @Transactional
     public void update(UserDto userDto) {
         User user = modelMapper.map(userDto, User.class);
-        userRepository.update(user);
+        userRepository.save(user);
     }
 
     @Override

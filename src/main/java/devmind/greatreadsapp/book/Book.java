@@ -35,7 +35,7 @@ public class Book {
     @Column(name = "published_date")
     private LocalDateTime publishedDate;
 
-    @OneToMany
+    @OneToMany(mappedBy = "book")
     private List<Review> reviewsList;
 
     @Column(name = "category")
@@ -43,5 +43,7 @@ public class Book {
 
     @Column(name = "is_published")
     private boolean isPublished;
+
+
 
 }

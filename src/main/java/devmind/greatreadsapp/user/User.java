@@ -1,19 +1,20 @@
 package devmind.greatreadsapp.user;
 
 
+import devmind.greatreadsapp.review.Review;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
-public  class User {
+@Entity
+@Table(name = "users")
+public class User {
 
      @Id
      @Column(name = "id")
@@ -31,5 +32,9 @@ public  class User {
 
      @Column(name = "lastName")
      String lastName;
+
+     @OneToMany(mappedBy = "user")
+     public List<Review> reviewList;
+
 
 }
