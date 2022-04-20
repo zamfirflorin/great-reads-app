@@ -1,32 +1,40 @@
 package devmind.greatreadsapp.user;
 
 
+import devmind.greatreadsapp.review.Review;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
-public  class User {
+@Entity
+@Table(name = "users")
+public class User {
 
-    static Long nbInstances = 1L;
+     @Id
+     @Column(name = "id")
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
      Long id ;
+
+     @Column(name = "email")
      String email;
+
+     @Column(name = "password")
      String password;
+
+     @Column(name = "firstName")
      String firstName;
+
+     @Column(name = "lastName")
      String lastName;
-     UserType type;
 
-    public User(String email, String password, String firstName, String lastName) {
-        this.id = getNumberOfInstance();
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+     @OneToMany(mappedBy = "user")
+     public List<Review> reviewList;
 
-    private Long getNumberOfInstance() {
-        return nbInstances++;
-    }
+
 }

@@ -9,9 +9,5 @@ import lombok.Setter;
 @Setter
 public class Administrator extends User {
 
-    public Administrator(String email, String password, String firstName, String lastName) {
-        super(email, password, firstName, lastName);
-    }
-
 
 }
