@@ -1,51 +1,23 @@
 package devmind.greatreadsapp.review;
 
-import devmind.greatreadsapp.InMemoryDataStore;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
-@Component
-public class ReviewRepository {
+@Repository
+public interface ReviewRepository extends JpaRepository<Review, Long> {
 
-    @Autowired
-    private InMemoryDataStore inMemoryDataStore;
+     Review save(Review review);
 
-    public void create(Review review) {
-        inMemoryDataStore.getReviewMap().put(review.getId(), review);
-    }
+     Optional<Review> findById(Long id);
 
-    public Review getReviewById(Long id) {
-        return inMemoryDataStore.getReviewMap().get(id);
-    }
-    public List<Review> getAllReviews() {
-        List<Review> reviewList = new ArrayList<>();
-        Map<Long, Review> reviewMap = inMemoryDataStore.getReviewMap();
-        for (Long key : reviewMap.keySet()) {
-            reviewList.add(reviewMap.get(key));
-        }
-        return reviewList;
-    }
+     List<Review> findAll();
 
-    public void updateReview(Review review) {
-        inMemoryDataStore.getReviewMap().put(review.getId(), review);
-    }
-    public void delete(Long id) {
-        inMemoryDataStore.getReviewMap().remove(id);
-    }
+     List<Review> findAllByBookId(Long bookId);
 
-    public List<Review> getAllReviewsByBookId(Long bookId) {
-        List<Review> reviewList = new ArrayList<>();
-        Map<Long, Review> reviewMap = inMemoryDataStore.getReviewMap();
+     Optional<Review> findReviewByIdAndUserId(Long reviewId, Long userId);
 
-        for (Long key : reviewMap.keySet()) {
-            if (reviewMap.get(key).getBook().getId().equals(bookId)) {
-                reviewList.add(reviewMap.get(key));
-            }
-        }
-        return reviewList;
-    }
+     void delete(Review review);
 }
