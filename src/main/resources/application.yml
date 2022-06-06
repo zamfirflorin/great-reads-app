@@ -13,7 +13,7 @@ spring:
         format_sql: true
     open-in-view: false
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     show-sql: true
   datasource:
     driverClassName: org.postgresql.Driver
@@ -24,4 +24,4 @@ spring:
   #disable security
   autoconfigure:
     exclude[0]: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
-    exclude[1]: org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
+   # exclude[1]: org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration

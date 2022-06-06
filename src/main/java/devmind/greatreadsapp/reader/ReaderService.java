@@ -8,6 +8,7 @@ import devmind.greatreadsapp.review.ReviewDto;
 import devmind.greatreadsapp.review.ReviewService;
 import devmind.greatreadsapp.user.User;
 import devmind.greatreadsapp.user.UserService;
+import devmind.greatreadsapp.user.UserType;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,16 +33,15 @@ public class ReaderService {
     public List<ReaderDto> getAllReaders() {
        return userService.getAllUsers().stream()
                 .map(userDto -> modelMapper.map(userDto, User.class))
-                .filter(user -> user instanceof Reader)
+                .filter(user -> user.getRole().equals(UserType.READER))
                 .map(reader -> modelMapper.map(reader, ReaderDto.class))
                 .toList();
     }
 
-    public List<Book> addToWishList(ReaderDto readerDto, Long bookId) {
-        List<Book> wishList = readerDto.getWishList();
+    public List<Book> addToWishList(Long readerId, Long bookId) {
+
         BookDto bookDto = bookService.getBookById(bookId);
-        wishList.add(modelMapper.map(bookDto, Book.class));
-        return wishList;
+        return List.of();
     }
 
     public List<Book> addToReadList(ReaderDto readerDto, Long bookId) {

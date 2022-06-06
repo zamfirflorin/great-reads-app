@@ -3,6 +3,8 @@ package devmind.greatreadsapp.review;
 
 import devmind.greatreadsapp.book.Book;
 import devmind.greatreadsapp.book.BookDto;
+import devmind.greatreadsapp.book.BookNotFoundException;
+import devmind.greatreadsapp.book.BookRepository;
 import devmind.greatreadsapp.user.User;
 import devmind.greatreadsapp.user.UserDto;
 import org.modelmapper.ModelMapper;
@@ -17,6 +19,9 @@ public class ReviewService {
 
     @Autowired
     private ReviewRepository reviewRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -38,10 +43,10 @@ public class ReviewService {
                 .toList();
     }
     @Transactional
-    public void updateReview(ReviewDto reviewDto) {
+    public ReviewDto updateReview(ReviewDto reviewDto) {
         final var review = reviewRepository.findById(reviewDto.getId()).orElseThrow(() -> new ReviewNotFoundException(reviewDto.getId()));
         reviewRepository.save(review);
-
+        return modelMapper.map(review, ReviewDto.class);
     }
     public void deleteReview(ReviewDto reviewDto) {
         final var  review = reviewRepository.findById(reviewDto.getId()).orElseThrow(() -> new ReviewNotFoundException(reviewDto.getId()));
@@ -50,5 +55,13 @@ public class ReviewService {
 
     public List<ReviewDto> getAllReviewsByBookId(Long bookId) {
         return reviewRepository.findAllByBookId(bookId).stream().map(review -> modelMapper.map(review, ReviewDto.class)).toList();
+    }
+
+    @Transactional
+    public ReviewDto addReview(ReviewDto reviewDto, Long bookId) {
+        var book = bookRepository.findById(bookId).orElseThrow(() -> new BookNotFoundException(bookId));
+        var review = modelMapper.map(reviewDto, Review.class);
+        reviewRepository.save(review);
+        return reviewDto;
     }
 }

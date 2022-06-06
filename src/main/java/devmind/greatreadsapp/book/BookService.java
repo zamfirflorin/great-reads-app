@@ -41,7 +41,7 @@ public class BookService {
     @Transactional
     public BookDto updateBook(BookDto bookDto) {
         Book book = bookRepository.findById(bookDto.getId()).orElseThrow(() -> new BookNotFoundException(bookDto.getId()));
-        book.setCategory(bookDto.getCategory());
+        //book.setCategory(bookDto.getCategory());
         book.setAuthor(book.getAuthor());
         book.setTitle(book.getTitle());
         bookRepository.save(book);

@@ -18,14 +18,9 @@ public class AdministratorController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping(value ="/approveAuthorBook")
-    public void approveAuthorBook(@RequestParam Long authorId, @RequestParam Long bookId) {
-        administratorService.approveAuthorBook(authorId, bookId);
-    }
-
-    @GetMapping(value ="/rejectAuthorBook")
-    public void rejectAuthorBook(@RequestParam Long authorId, @RequestParam Long bookId)  {
-        administratorService.rejectAuthorBook(authorId, bookId);
+    @GetMapping(value ="/approveOrReject")
+    public void approve(@RequestParam Long authorId, @RequestParam Long bookId, boolean status) {
+        administratorService.approveOrRejectBook(authorId, bookId, status);
     }
 
     @DeleteMapping(value ="/deleteUserReview")

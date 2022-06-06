@@ -1,7 +1,7 @@
 package devmind.greatreadsapp.book;
 
 
-import devmind.greatreadsapp.review.Review;
+import devmind.greatreadsapp.categories.Category;
 import lombok.*;
 
 import javax.persistence.*;
@@ -35,15 +35,12 @@ public class Book {
     @Column(name = "published_date")
     private LocalDateTime publishedDate;
 
-    @OneToMany(mappedBy = "book")
-    private List<Review> reviewsList;
-
-    @Column(name = "category")
-    private String category;
-
     @Column(name = "is_published")
     private boolean isPublished;
 
+    @OneToMany
+    @JoinColumn(name = "category_id")
+    private List<Category> category;
 
 
 }

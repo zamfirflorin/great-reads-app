@@ -20,18 +20,9 @@ public class AdministratorService {
     private ReviewRepository reviewRepository;
 
     @Transactional
-    public void approveAuthorBook(final Long authorId, final Long bookId) {
+    public void approveOrRejectBook(final Long authorId, final Long bookId, boolean status) {
         Book book  = bookRepository.findById(bookId).orElseThrow(() -> new BookNotFoundException(bookId));
-        book.setPublished(true);
-        bookRepository.save(book);
-    }
-
-    @Transactional
-    public void rejectAuthorBook(final Long authorId, final Long bookId) {
-        Book book  = bookRepository.findById(bookId).orElseThrow(() -> new BookNotFoundException(bookId));
-        if (book.isPublished()) {
-            book.setPublished(false);
-        }
+        book.setPublished(status);
         bookRepository.save(book);
     }
 

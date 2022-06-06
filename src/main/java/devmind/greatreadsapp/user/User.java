@@ -1,6 +1,7 @@
 package devmind.greatreadsapp.user;
 
 
+import devmind.greatreadsapp.book.Book;
 import devmind.greatreadsapp.review.Review;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,22 +20,22 @@ public class User {
      @Id
      @Column(name = "id")
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-     Long id ;
+     private Long id ;
 
      @Column(name = "email")
-     String email;
+     private String email;
 
      @Column(name = "password")
-     String password;
+     private String password;
 
      @Column(name = "firstName")
-     String firstName;
+     private String firstName;
 
      @Column(name = "lastName")
-     String lastName;
+     private String lastName;
 
-     @OneToMany(mappedBy = "user")
-     public List<Review> reviewList;
+     @Column(name = "role")
+     private String role;
 
 
 }
